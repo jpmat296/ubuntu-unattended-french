@@ -213,7 +213,8 @@ sed -i -r 's/timeout\s+[0-9]+/timeout 1/g' $tmp/iso_new/isolinux/isolinux.cfg
 
 #   late_command="chroot /target curl -L -o /home/$username/start.sh https://raw.githubusercontent.com/netson/ubuntu-unattended/master/start.sh ;\
 #     chroot /target chmod +x /home/$username/start.sh ;"
-late_command="chroot /target mkdir -m 700 /home/jpmat/.ssh ;\
+late_command="chroot /target sh -c 'echo \"IPv4: \\\\\4\" >> /etc/issue && echo \"IPv6: \\\\\6\" >> /etc/issue && echo \"\" >> /etc/issue' ;\
+ chroot /target mkdir -m 700 /home/jpmat/.ssh ;\
  chroot /target curl -o /home/jpmat/.ssh/authorized_keys http://anonymous@nas.matsusoft.com:5005/public/id_rsa.pub ;\
  chroot /target chmod 600 /home/jpmat/.ssh/authorized_keys ;\
  chroot /target chown -R jpmat.jpmat /home/jpmat/.ssh ;"
